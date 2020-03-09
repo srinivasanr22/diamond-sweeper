@@ -6,7 +6,7 @@ import "./Board.css";
 
 /***
  * Yet to do
- *  to do the arrow -position
+ *  store the highest score.
  */
 
 class Board extends Component {
@@ -66,7 +66,7 @@ class Board extends Component {
         const data = {
           src: j === diamondPosition[i] ? DIAMOND : ARROW,
           showIcon: false,
-          alt: j === diamondPosition[i] ? 'DIAMOND' : 'ARROW',
+          alt: j === diamondPosition[i] ? "DIAMOND" : "ARROW",
           isDiamond: j === diamondPosition[i]
         };
         icon.push(data);
@@ -82,7 +82,7 @@ class Board extends Component {
    */
   countScore = data => {
     let { diamondsLeft } = this.state;
-    if (data.isDiamondFound) {
+    if (data.isDiamond) {
       diamondsLeft--;
     }
     // currentScore
@@ -109,8 +109,32 @@ class Board extends Component {
     this.setState({ iconList });
   };
 
-  updateArrowDirection = (data) => {
-    
+  /***
+   * Used to calculate the dynamic arrow position to denote 
+   * the near by diamond inside each square.
+   */
+  updateArrowDirection = data => {
+    const { iconList, diamondPosition, nbrOfRows } = this.state;
+    let customClass = "";
+    if (iconList[data.rIndex][data.cIndex].isDiamond) {
+      return;
+    }
+    const diamondIndex = diamondPosition[data.rIndex];
+    const prevRow = data["rIndex"] - 1;
+    const nextRow = data["rIndex"] + 1;
+    if (prevRow > -1 && iconList[prevRow][data.cIndex].isDiamond) {
+      customClass = "arrow-up";
+    } else if (
+      nextRow !== parseInt(nbrOfRows) &&
+      iconList[nextRow][data.cIndex].isDiamond
+    ) {
+      customClass = "arrow-down";
+    } else {
+      customClass = diamondIndex > data["cIndex"] ? "arrow" : "arrow-left";
+    }
+    // update class.
+    iconList[data.rIndex][data.cIndex].customClass = customClass;
+    this.setState({ iconList });
   };
 
   render() {
@@ -151,7 +175,8 @@ class Board extends Component {
 
         {!diamondsLeft && (
           <div className="success">
-            Congraj..! you have found all diamonds and your Score is {currentScore}
+            Congraj..! you have found all diamonds and your Score is{" "}
+            {currentScore}
             <input
               type="button"
               onClick={this.setInitialValue}

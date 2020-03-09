@@ -14,14 +14,14 @@ img {
 }
 
 
-.up-arrow {
+.arrow-up {
     transform: rotate(272deg);
 }
 
-.down-arrow {
+.arrow-down {
     transform: rotate(90deg);
 }
 
-.left-arrow {
+.arrow-left {
     transform: rotate(180deg);
 }
