@@ -1,12 +1,12 @@
 :root {
-  font-size: 14px;
+	font-size: 14px;
 }
 
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #C0C0C0;
-  color: #282c34;
-  font-size: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #C0C0C0;
+	color: #282c34;
+	font-size: 1rem;
 }

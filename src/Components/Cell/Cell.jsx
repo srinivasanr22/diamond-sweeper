@@ -11,6 +11,10 @@ class Cell extends Component {
     };
   }
 
+  /***
+   * This function will emit event 
+   * to its parent component.
+   */
   findDiamond = (isDiamond) => {
     const {isPressed}= this.state;
     const {rIndex, cIndex} = this.props;
