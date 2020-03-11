@@ -194,7 +194,7 @@ class Board extends Component {
         {diamondsLeft === 0 && (
           <section className="success">
             <h3 className="text">
-              Congraj..! you have found all diamonds and your Score is{" "}
+              Congraj..! you have found all diamonds and your Score is
               {currentScore}
             </h3>
             <input
