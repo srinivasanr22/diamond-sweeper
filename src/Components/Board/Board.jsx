@@ -136,9 +136,11 @@ class Board extends Component {
     const diamondIndex = diamondPosition[data.rIndex];
     const prevRow = data["rIndex"] - 1;
     const nextRow = data["rIndex"] + 1;
+    // if first row this condition will skip.
     if (prevRow > -1 && iconList[prevRow][data.cIndex].isDiamond) {
       customClass = "arrow-up";
     } else if (
+      // if last row this condition will skip.
       nextRow !== parseInt(nbrOfRows) &&
       iconList[nextRow][data.cIndex].isDiamond
     ) {
@@ -189,12 +191,15 @@ class Board extends Component {
           </section>
         )}
 
-        {!diamondsLeft && (
+        {diamondsLeft && (
           <section className="success">
-            Congraj..! you have found all diamonds and your Score is{" "}
-            {currentScore}
+            <h3 className="text">
+              Congraj..! you have found all diamonds and your Score is{" "}
+              {currentScore}
+            </h3>
             <input
               type="button"
+              className="button"
               onClick={this.setInitialValue}
               value="Play Again...!"
             />

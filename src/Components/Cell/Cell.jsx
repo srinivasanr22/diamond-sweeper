@@ -6,8 +6,7 @@ class Cell extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isPressed: false,
-      showArrow: false
+      isPressed: false
     };
   }
 
