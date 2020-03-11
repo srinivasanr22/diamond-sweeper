@@ -4,11 +4,6 @@ import ScoreCard from "../ScoreCard/ScoreCard";
 import { DIAMOND, ARROW } from "../../assets/images/index";
 import "./Board.css";
 
-/***
- * Yet to do
- *  store the highest score.
- */
-
 class Board extends Component {
   constructor(props) {
     super(props);
@@ -20,6 +15,7 @@ class Board extends Component {
       diamondsLeft: 0,
       currentScore: 0,
       showArrow: false,
+      highestScore: 0,
       iconList: []
     };
   }
@@ -37,9 +33,11 @@ class Board extends Component {
    */
   setInitialValue = () => {
     const { nbrOfCol, nbrOfRows } = this.state;
+    let { highestScore } = this.state;
     const diamondsLeft = nbrOfCol;
     const currentScore = nbrOfRows * nbrOfCol;
-    this.setState({ diamondsLeft, currentScore });
+    highestScore = localStorage.getItem("highestScore") || 0;
+    this.setState({ diamondsLeft, currentScore, highestScore });
   };
 
   /***
@@ -91,6 +89,9 @@ class Board extends Component {
     this.setState({ diamondsLeft, currentScore });
     this.updateArrowDirection(data);
     this.updateIconVisibility(data);
+    if (!diamondsLeft) {
+      this.updateHighestScore(currentScore);
+    }
   };
 
   /***
@@ -109,8 +110,21 @@ class Board extends Component {
     this.setState({ iconList });
   };
 
+  /**
+   *  This function used to set highestscore
+   *  in localstorage.
+   */
+  updateHighestScore = cScore => {
+    const highestScore = localStorage.getItem("highestScore");
+    if (!highestScore) {
+      localStorage.setItem("highestScore", cScore);
+    } else if (parseInt(cScore) > parseInt(highestScore)) {
+      localStorage.setItem("highestScore", cScore);
+    }
+  };
+
   /***
-   * Used to calculate the dynamic arrow position to denote 
+   * Used to calculate the dynamic arrow position to denote
    * the near by diamond inside each square.
    */
   updateArrowDirection = data => {
@@ -144,15 +158,16 @@ class Board extends Component {
       diamondPosition,
       diamondsLeft,
       currentScore,
+      highestScore,
       iconList
     } = this.state;
     return (
       <React.Fragment>
         {diamondsLeft && (
-          <div className="container">
-            <div className="game-container">
+          <section className="container">
+            <section className="game-container">
               {[...Array(nbrOfRows)].map((i, rIndex) => (
-                <div className="layout-container" key={rIndex}>
+                <section className="layout-container" key={rIndex}>
                   {[...Array(nbrOfCol)].map((v, cIndex) => (
                     <Cell
                       key={cIndex}
@@ -163,18 +178,19 @@ class Board extends Component {
                       icon={iconList[rIndex][cIndex]}
                     />
                   ))}
-                </div>
+                </section>
               ))}
-            </div>
+            </section>
             <ScoreCard
               diamondsLeft={diamondsLeft}
               currentScore={currentScore}
+              highestScore={highestScore}
             />
-          </div>
+          </section>
         )}
 
         {!diamondsLeft && (
-          <div className="success">
+          <section className="success">
             Congraj..! you have found all diamonds and your Score is{" "}
             {currentScore}
             <input
@@ -182,7 +198,7 @@ class Board extends Component {
               onClick={this.setInitialValue}
               value="Play Again...!"
             />
-          </div>
+          </section>
         )}
       </React.Fragment>
     );

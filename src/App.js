@@ -8,7 +8,7 @@ class App extends Component {
       <React.Fragment>
         <header className="header">
           <h3>
-            The goal of this exercise is to build a Diamond Sweeper game...!
+               The goal of this exercise is to build a Diamond Sweeper game...!
           </h3>
         </header>
         <Board />
@@ -17,5 +17,4 @@ class App extends Component {
   }
 }
 
-// export default hot(module)(App);
 export default App;

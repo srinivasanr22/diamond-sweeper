@@ -30,10 +30,10 @@ class Cell extends Component {
     const { isPressed } = this.state;
     return (
       <React.Fragment>
-        <div className='cell' onClick={() => this.findDiamond(cIndex === setPosition)}>
+        <section className='cell' onClick={() => this.findDiamond(cIndex === setPosition)}>
            { !isPressed && <img src={QUESTION_MARK} alt="QUESTION" /> }
            { isPressed && icon.showIcon ? <img src={icon.src} className={icon.customClass} alt={icon.alt} /> : ''}
-        </div>
+        </section>
       </React.Fragment>
     );
   }
