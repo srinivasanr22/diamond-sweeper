@@ -191,7 +191,7 @@ class Board extends Component {
           </section>
         )}
 
-        {diamondsLeft && (
+        {diamondsLeft === 0 && (
           <section className="success">
             <h3 className="text">
               Congraj..! you have found all diamonds and your Score is{" "}
