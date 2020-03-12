@@ -6,12 +6,12 @@ class ScoreCard extends Component {
     const { highestScore, diamondsLeft, currentScore } = this.props;
     return (
       <React.Fragment>
-        <section className="score-board">
-          <section className="title">Score Board</section>
-          <section className="info">Your Highest Score : {highestScore} </section>
-          <section className="info">Diamonds yet to be found : {diamondsLeft} </section>
-          <section className="info">Your Current Score : {currentScore}</section>
-        </section>
+        <aside className="score-board">
+          <article className="title">Score Board</article>
+          <article className="info">Your Highest Score : {highestScore} </article>
+          <article className="info">Diamonds yet to be found : {diamondsLeft} </article>
+          <article className="info">Your Current Score : {currentScore}</article>
+        </aside>
       </React.Fragment>
     );
   }
